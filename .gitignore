@@ -1,0 +1,4 @@
+# Project exclude paths
+/venv/
+stock_prices_latest.csv
+stock_prices_latest_filtered_2018-01-01.csv
