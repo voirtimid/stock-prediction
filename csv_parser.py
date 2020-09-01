@@ -1,13 +1,11 @@
-import pandas as pd
 import datetime
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
-from keras.models import Sequential
+import pandas as pd
 from keras.layers import Dense
-from keras.layers import LSTM
 from keras.layers import Dropout
-import tensorflow
-import matplotlib.pyplot as plt
+from keras.layers import LSTM
+from keras.models import Sequential
+from sklearn.preprocessing import MinMaxScaler
 
 
 def date_parse(date):
@@ -50,7 +48,7 @@ regressor.add(Dense(units=1))
 
 regressor.compile(optimizer='adam', loss='mean_squared_error')
 
-regressor.fit(X_train, y_train, epochs=100, batch_size=32)
+regressor.fit(X_train, y_train, epochs=10, batch_size=32)
 
 # steps from link ->
 # https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/?
