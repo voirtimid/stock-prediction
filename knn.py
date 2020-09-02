@@ -15,7 +15,7 @@ data_size = len(data)
 split_factor = math.floor(data_size * 0.8)
 
 train = data[:split_factor]
-valid = data[split_factor + 1:]
+valid = data[split_factor:]
 
 x_train = train.drop('Close', axis=1)
 y_train = train['Close']

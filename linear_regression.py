@@ -10,7 +10,7 @@ data_size = len(data)
 split_factor = math.floor(data_size * 0.8)
 
 train = data[:split_factor]
-valid = data[split_factor + 1:]
+valid = data[split_factor:]
 
 x_train = train.drop('Close', axis=1)
 y_train = train['Close']
@@ -29,7 +29,7 @@ print(rms)
 valid['Predictions'] = 0
 valid['Predictions'] = preds
 
-valid.index = data[split_factor + 1:].index
+valid.index = data[split_factor:].index
 train.index = data[:split_factor].index
 
 plt.title("Linear regression prediction")
