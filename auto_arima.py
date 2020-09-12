@@ -4,6 +4,7 @@ import numpy as np
 from pmdarima.arima import auto_arima
 import matplotlib.pyplot as plt
 from read_data import read_data
+from sklearn.metrics import mean_squared_error
 
 data = read_data()
 
@@ -22,8 +23,9 @@ model.fit(training)
 predictions = model.predict(n_periods=504)
 predictions = pd.DataFrame(predictions, index=valid.index, columns=['Prediction'])
 
-rms = np.sqrt(np.mean(np.power((np.array(valid['Close']) - np.array(predictions['Prediction'])), 2)))
-print(rms)
+mse = mean_squared_error(np.array(valid['Close']), np.array(predictions['Prediction']))
+rmse = np.sqrt(mse)
+print(rmse)
 
 
 # plot

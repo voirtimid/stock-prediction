@@ -1,10 +1,12 @@
 import math
-import pandas as pd
-import numpy as np
+
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler
+import numpy as np
+from keras.layers import Dense, LSTM
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, LSTM
+from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import MinMaxScaler
+
 from read_data import read_data
 
 data = read_data()
@@ -55,8 +57,9 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 closing_price = model.predict(X_test)
 closing_price = scaler.inverse_transform(closing_price)
 
-rms = np.sqrt(np.mean(np.power((valid - closing_price), 2)))
-print(rms)
+mse = mean_squared_error(valid, closing_price)
+rmse = np.sqrt(mse)
+print(rmse)
 
 train = data[:split_factor]
 valid = data[split_factor:]

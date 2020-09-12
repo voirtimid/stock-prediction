@@ -3,6 +3,7 @@ import math
 import matplotlib.pyplot as plt
 from read_data import read_data
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 
 data = read_data()
 
@@ -22,8 +23,9 @@ model.fit(x_train, y_train)
 
 # make predictions and find the rmse
 preds = model.predict(x_valid)
-rms = np.sqrt(np.mean(np.power((np.array(y_valid) - np.array(preds)), 2)))
-print(rms)
+mse = mean_squared_error(y_valid, preds)
+rmse = np.sqrt(mse)
+print(rmse)
 
 # plot
 valid['Predictions'] = 0
@@ -32,7 +34,7 @@ valid['Predictions'] = preds
 valid.index = data[split_factor:].index
 train.index = data[:split_factor].index
 
-plt.title("Linear regression prediction")
+plt.title("Linear regression")
 plt.xlabel("Number of day")
 plt.ylabel("Stock price")
 plt.plot(train['Close'], label='Train Close price')

@@ -6,6 +6,7 @@ from read_data import read_data
 from sklearn import neighbors
 from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
 
 data = read_data()
 
@@ -37,8 +38,9 @@ model = GridSearchCV(knn, params, cv=5)
 model.fit(x_train, y_train)
 preds = model.predict(x_valid)
 
-rms = np.sqrt(np.mean(np.power((np.array(y_valid) - np.array(preds)), 2)))
-print(rms)
+mse = mean_squared_error(y_valid, preds)
+rmse = np.sqrt(mse)
+print(rmse)
 
 valid['Predictions'] = 0
 valid['Predictions'] = preds

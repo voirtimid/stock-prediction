@@ -1,5 +1,7 @@
 import pandas as pd
+import numpy as np
 from datetime import datetime
+from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 
 
@@ -25,18 +27,24 @@ df = df.sort_index(ascending=True, axis=0)
 
 data = df["Close/Last"].tolist()
 
-predicted_values = moving_average_algorithm(60, data)
+predicted_values = moving_average_algorithm(10, data)
 
 errors = []
 for i in range(len(data)):
     errors.append(data[i] - predicted_values[i])
 
-plt.title("Moving average prediction")
+mse = mean_squared_error(data, errors)
+rmse = np.sqrt(mse)
+
+print(mse)
+print(rmse)
+
+plt.title("Moving average (10)")
 plt.xlabel("Number of day")
 plt.ylabel("Stock price")
 plt.plot(data, label="Real Close Price")
 plt.plot(predicted_values, label="Predicted Close Price")
 # plt.plot(errors, label="Error")
 plt.legend()
-plt.savefig(f'plots/moving_average.png')
+plt.savefig(f'plots/moving_average_10_error.png')
 plt.show()
