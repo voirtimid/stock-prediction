@@ -31,9 +31,9 @@ predicted_values = moving_average_algorithm(10, data)
 
 errors = []
 for i in range(len(data)):
-    errors.append(data[i] - predicted_values[i])
+    errors.append(abs(data[i] - predicted_values[i]))
 
-mse = mean_squared_error(data, errors)
+mse = mean_squared_error(data[11:], predicted_values[11:])
 rmse = np.sqrt(mse)
 
 print(mse)
